@@ -22,6 +22,12 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
+typedef struct s_map{
+	int i[2];
+	char *av;
+	int fd;
+}		t_map;
+
 typedef struct	s_vars {
 	void	*mlx;
 	void	*win;
@@ -44,15 +50,15 @@ typedef struct s_point {
 	float y;
 }	t_point;
 
-void	DrawCircle(int r, t_vars *vars);
+void	DrawCircle(int r, t_vars *vars, t_map *map);
 void	dda(t_data *img, t_point a, t_point b);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		keys_hook(int key, t_vars *vars);
 void	new_win(t_vars *vars, int height, int fd);
-void	ft_line_counter(int	*count, char *s, t_vars *vars);
+void	ft_line_counter(t_vars *vars, t_map *map);
 void	DrawSquare(t_vars *vars, int x, int y, int color);
 void	ft_putstr(char *str);
 char	*get_next_line(int fd);
 size_t	ft_strlen(char *str);
-
+void	Show_Map(t_vars *vars, t_map *map);
 #endif

@@ -4,7 +4,9 @@ FLAGS = -lmlx -framework OpenGL -framework AppKit
 
 CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g3
 
-FILES = cub3d.c dda_algho.c new_window.c line_counter.c get_next_line.c
+FILES = cub3d.c dda_algho.c new_window.c\
+		line_counter.c get_next_line.c  \
+		Map.c
 
 NAME = cub3d
 
