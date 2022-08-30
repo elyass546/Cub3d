@@ -77,7 +77,7 @@ void	calculation(t_vars *vars, int r)
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
 }
 
-void DrawCircle(int r, t_vars *vars, t_map *map)
+void DrawCircle(int r, t_vars *vars)
 {
 	// int right;
 	// int left;
@@ -94,7 +94,7 @@ void DrawCircle(int r, t_vars *vars, t_map *map)
 	vars->img.img = mlx_new_image(vars->mlx, 1920, 1080);
 	vars->img.addr = mlx_get_data_addr(vars->img.img, &vars->img.bits_per_pixel,
 				&vars->img.line_length, &vars->img.endian);
-	Show_Map(vars, map);
+	Show_Map(vars);
 	calculation(vars, r);
 }
 
@@ -103,7 +103,6 @@ int	main(int ac, char **av)
 	(void)ac;
 	t_vars	vars;
 	t_data	img;
-	t_map	map;
 
 	vars.mlx = mlx_init();
 	// vars.lines = i[0];
@@ -114,12 +113,11 @@ int	main(int ac, char **av)
 	vars.x1 = 500;
 	vars.y1 = 500;
 	vars.img = img;
-	map.av = av[1];
-	map.fd = open(av[1], O_RDONLY);
-	Show_Map(&vars, &map);
+	vars.mapa.av = av[1];
+	Show_Map(&vars);
+	DrawCircle(100, &vars);
 	// ft_line_counter(i, av[1], &vars);
 	// new_win(&vars, i[0], fd);
-	DrawCircle(100, &vars, &map);
 	mlx_hook(vars.win, 17, 0, salam, &vars);
 	mlx_key_hook(vars.win, keys_hook, &vars);
 	mlx_loop(vars.mlx);

@@ -6,7 +6,7 @@
 /*   By: ie-laabb <ie-laabb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:40:27 by ie-laabb          #+#    #+#             */
-/*   Updated: 2022/08/29 23:45:01 by ie-laabb         ###   ########.fr       */
+/*   Updated: 2022/08/30 12:43:14 by ie-laabb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,32 +46,40 @@ void	map_maker(t_vars *vars, char *str, int i, int j)
 	}
 }
 
-void	ft_line_counter(t_vars *vars, t_map *map)
+void	ft_line_counter(t_vars *vars)
 {
 	int		i, j;
 	char	*str;
 
+	vars->mapa.fd = open(vars->mapa.av, O_RDONLY);
 	i = 0, j = 0;
-	if (map->fd < 0)
+	if (vars->mapa.fd < 0)
 	{
 		ft_putstr("Error\nmap name is unacceptable\n");
 		exit(1);
 	}
-	str = get_next_line(map->fd);
-	map->i[1] = ft_strlen(str);
+	str = get_next_line(vars->mapa.fd);
+	if (str)
+		vars->mapa.i[1] = ft_strlen(str);
+	else
+	{
+		printf("Error 404\n");
+		exit(1);
+	}
 	while (str)
 	{
 		map_maker(vars, str, i, j);
 		j += 50;
 		i = 0;
 		free (str);
-		str = get_next_line(map->fd);
+		str = get_next_line(vars->mapa.fd);
 	}
-	map->i[0] = i;
+	vars->mapa.i[0] = i;
 }
 
-void	Show_Map(t_vars *vars, t_map *map)
+void	Show_Map(t_vars *vars)
 {
-	ft_line_counter(vars, map);
-	new_win(vars, map->i[0], map->fd);
+	ft_line_counter(vars);
+	// new_win(vars,vars->mapa.i[0], vars->mapa.fd);
+	// map_maker(vars, )
 }

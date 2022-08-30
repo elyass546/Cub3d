@@ -43,6 +43,7 @@ typedef struct	s_vars {
 	char	**map;
 	int		lines;
 	t_data	img;
+	t_map	mapa;
 }				t_vars;
 
 typedef struct s_point {
@@ -50,15 +51,15 @@ typedef struct s_point {
 	float y;
 }	t_point;
 
-void	DrawCircle(int r, t_vars *vars, t_map *map);
+void	DrawCircle(int r, t_vars *vars);
 void	dda(t_data *img, t_point a, t_point b);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		keys_hook(int key, t_vars *vars);
 void	new_win(t_vars *vars, int height, int fd);
-void	ft_line_counter(t_vars *vars, t_map *map);
+void	ft_line_counter(t_vars *vars);
 void	DrawSquare(t_vars *vars, int x, int y, int color);
 void	ft_putstr(char *str);
 char	*get_next_line(int fd);
 size_t	ft_strlen(char *str);
-void	Show_Map(t_vars *vars, t_map *map);
+void	Show_Map(t_vars *vars);
 #endif
